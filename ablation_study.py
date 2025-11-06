@@ -18,7 +18,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from torch.cuda.amp import autocast, GradScaler
+from torch.amp import autocast, GradScaler
 from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.metrics import f1_score, accuracy_score
@@ -319,7 +319,7 @@ def train_epoch(model, loader, optimizer, focal_loss, scaler, alpha_recon=0.5, a
 
         optimizer.zero_grad(set_to_none=True)
 
-        with autocast():
+        with autocast('cuda'):
             out = model(masked)
             rl = ae_loss(out["reconstructed"], spectrum, mask)
             cl = focal_loss(out["class_logits"], label)
@@ -348,7 +348,7 @@ def validate_epoch(model, loader, focal_loss, alpha_recon=0.5, alpha_class=1.0):
         mask = b["mask"].to(device)
         label = b["label"].to(device)
 
-        with autocast():
+        with autocast('cuda'):
             out = model(masked)
             rl = ae_loss(out["reconstructed"], spectrum, mask)
             cl = focal_loss(out["class_logits"], label)
