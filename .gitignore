@@ -47,7 +47,6 @@ data/
 
 # Results and logs
 results/
-logs/
 *.csv
 *.json
 *.png
