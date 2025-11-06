@@ -77,7 +77,7 @@ class PCGrad:
 
     @property
     def optimizer(self): return self._optim
-    def zero_grad(self): return self._optim.zero_grad(set_to_none=True)
+    def zero_grad(self, set_to_none=True): return self._optim.zero_grad(set_to_none=set_to_none)
     def step(self): return self._optim.step()
 
     def pc_backward(self, objectives, scaler=None):
