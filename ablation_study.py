@@ -434,7 +434,7 @@ def train_head_ablation(head_mode, X, y, groups, epochs, batch_size, folds):
 def run_ablation(head_modes=None, parquet="hf://datasets/alfiwillianz/hsi/data.parquet"):
 
     if head_modes is None:
-        head_modes = ["gap_conv", "attn", "transformer", "gru"]
+        head_modes = ["attn", "transformer", "gru"]
 
     X, y, groups = load_data_from_parquet(parquet)
 
